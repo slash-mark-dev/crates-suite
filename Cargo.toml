@@ -1,0 +1,37 @@
+[package]
+name = "sm-crates"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Crates.io Suite: 25 advanced Rust package intelligence tools (soundness, compile-time supply chain, features, build performance, API evolution and ecosystem signals) on live crates.io data."
+authors = ["Slash Mark IT Solutions <mukesh@slashmark.in>"]
+license = "MIT"
+repository = "https://github.com/slash-mark-dev/crates-suite"
+homepage = "https://slashmark.in"
+documentation = "https://github.com/slash-mark-dev/crates-suite#readme"
+readme = "README.md"
+keywords = ["cargo", "supply-chain", "security", "audit", "crates-io"]
+categories = ["command-line-utilities", "development-tools::cargo-plugins"]
+exclude = ["/tests", "/website", "/.github", "/fixtures", "/scripts"]
+
+[[bin]]
+name = "sm-crates"
+path = "src/main.rs"
+
+[dependencies]
+ureq = { version = "3", default-features = false, features = ["rustls", "gzip"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.9"
+flate2 = "1"
+tar = "0.4"
+semver = "1"
+sha2 = "0.10"
+ed25519-dalek = { version = "2", default-features = false, features = ["std"] }
+base64 = "0.22"
+rustc-demangle = "0.1"
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
